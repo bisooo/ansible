@@ -1,0 +1,13 @@
+Dear {{item.name}},
+
+Here's an overview of your trips:
+
+{% for trip in item.trips %}
+-  {{ trip.destination }}: From {{ trip.start }} to {{ trip.end }}, cost: {{ trip.cost }}
+{% endfor %}
+
+Your total bill comes out to {{item.cost}}
+
+Thank you,
+
+Jinja Travel 

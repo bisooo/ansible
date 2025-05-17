@@ -1,0 +1,22 @@
+---
+# tasks file for user-with-editor
+- name: Create the user
+  become: true
+  ansible.builtin.user:
+    name: "{{ username }}"
+    state: present
+
+- name: Set permissions of the home dir
+  become: true
+  ansible.builtin.file:
+    dest: "/home/{{ username }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0755"
+    state: directory
+
+- name: Add the editor setting
+  become: true
+  ansible.builtin.lineinfile:
+    path: "/home/{{ username }}/.bashrc"
+    line: "export EDITOR={{ editor }}"

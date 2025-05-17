@@ -1,0 +1,9 @@
+---
+- name: Set a logon message for remote servers
+  hosts: ubuntu-bisooo
+  tasks:
+    - name: Copy the logon message file to the remote server
+      become: true
+      ansible.builtin.copy:
+        src: logon-message.txt
+        dest: /etc/motd

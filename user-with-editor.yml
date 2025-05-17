@@ -1,0 +1,15 @@
+---
+- name: Create the users with their preferred editors
+  hosts: ubuntu-bisooo
+  roles:
+    - role: user-with-editor
+      vars:
+        username: jessica
+        editor: vi
+    - role: user-with-editor
+      vars:
+        username: bob
+        editor: emacs
+    - role: user-with-editor
+      vars:
+        username: paul

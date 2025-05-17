@@ -1,0 +1,8 @@
+---
+- name: Get the current BTC price
+  hosts: ubuntu-bisooo
+  tasks:
+    - name: Fetch and save the latest BTC price from the API
+      ansible.builtin.get_url:
+        url: https://api.coindesk.com/v1/bpi/currentprice.json
+        dest: ~/btc.json

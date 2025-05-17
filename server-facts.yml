@@ -1,0 +1,15 @@
+---
+- name: Display some facts about the remote server
+  hosts: ubuntu-bisooo
+  tasks:
+    - name: Linux distro
+      ansible.builtin.debug:
+        msg: Server is running an {{ ansible_distribution }} Linux Distro
+
+    - name: Processor type
+      ansible.builtin.debug:
+        msg: Server has an {{ ansible_processor[2] }} processor
+
+    - name: Free memory
+      ansible.builtin.debug:
+        msg: Server has {{ ansible_memory_mb['real']['free'] }}MB of free storage

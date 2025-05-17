@@ -1,0 +1,31 @@
+---
+- name: Print message
+  ansible.builtin.debug:
+    msg: User {{ item.username }} created with readme
+  when: item.has_readme   
+
+- name: Print message
+  ansible.builtin.debug:
+    msg: User {{ item.username }} created with no readme
+  when: not item.has_readme
+
+- name: Create a user
+  become: true
+  ansible.builtin.user:
+    name: "{{ item.username }}"
+    state: present
+
+- name: Create a readme
+  become: true
+  ansible.builtin.copy:
+    dest: "/home/{{ item.username }}/readme.txt"
+    content: Welcome to the server {{ item.username }} !
+    owner: "{{ item.username }}"
+  when: item.has_readme
+
+- name: Remove readme
+  become: true
+  ansible.builtin.file:
+    dest: "/home/{{ item.username }}/readme.txt"
+    state: absent
+  when: not item.has_readme 

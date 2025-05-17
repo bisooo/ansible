@@ -1,0 +1,12 @@
+---
+- name: Create a text file on the remote servers
+  hosts: "{{target_host}}"
+  vars_prompt:
+    - name: file_content
+      prompt: Enter the file content you would like
+      private: false
+  tasks:
+    - name: Create the file
+      ansible.builtin.copy:
+        content: "{{ file_content }}"
+        dest: "{{ file_name }}"

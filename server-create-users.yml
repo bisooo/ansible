@@ -1,0 +1,13 @@
+---
+- name: Create users using a loop on the server
+  hosts: ubuntu-bisooo
+  tasks:
+    - name: Create Users
+      include_tasks: create-user.yml
+      loop:
+        - username: test1
+          has_readme: true
+        - username: test2
+          has_readme: false
+        - username: test3
+          has_readme: true

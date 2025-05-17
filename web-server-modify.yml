@@ -1,0 +1,20 @@
+---
+- name: Modify the html served by the webserver
+  hosts: ubuntu-bisooo
+  become: true
+  tasks:
+    - name: Add a host greeting to html page
+      ansible.builtin.blockinfile:
+        path: /var/www/html/index.html
+        marker: "<!-- {mark} GREETING -->"
+        insertafter: "<h1>"
+        block: |
+          <h2>Welcome to {{ ansible_hostname }}</h2>
+          <p>Last updated on {{ ansible_date_time.iso8601 }}</p>
+
+    - name: Add a personal footer to html page
+      ansible.builtin.blockinfile:
+        path: /var/www/html/index.html
+        marker: "<!-- {mark} FOOTER -->"
+        insertbefore: "</body>"
+        block: <p>This message brought to you by {{ ansible_user }}</p>

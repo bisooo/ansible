@@ -1,0 +1,21 @@
+---
+- name: Modify the bash shell on the remote server
+  hosts: ubuntu-bisooo
+  become: true
+  tasks:
+    - name: Create a custom prompt
+      ansible.builtin.lineinfile:
+        path: .bashrc
+        line: 'export PS1="managed node \h user: \u, location: \w \$"'
+
+    - name: Modify the prompt
+      ansible.builtin.replace:
+        path: .bashrc
+        regexp: "^export PS1=.*"
+        replace: 'export PS1="[\\u@\\h:\\w]\\$ "'
+
+    - name: Remove the custom prompt
+      ansible.builtin.replace:
+        path: .bashrc
+        regexp: "^export PS1=.*"
+        replace: ""
